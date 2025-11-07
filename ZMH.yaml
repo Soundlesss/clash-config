@@ -1,0 +1,64 @@
+proxies:
+  - name: "REALITY"
+    type: vless
+    server: hangzzz.top
+    port: 443
+    uuid: 1811b551-566e-4dc0-92d3-4c12aa7819f3
+    servername: www.tesla.com
+    flow: xtls-rprx-vision
+    tls: true
+    udp: true
+    reality-opts:
+      public-key: PGTrTptrJVQF1Z2k5M1PanhLbXJRpUcG78pG694Dmy8
+    client-fingerprint: chrome
+
+  - name: "VL"
+    type: vless
+    server: hangzzz.top
+    port: 8443
+    uuid: 1811b551-566e-4dc0-92d3-4c12aa7819f3
+    servername: hangzzz.top
+    flow: tls-rprx-vision
+    network: ws
+    tls: true
+    ws-opts:
+      path: "/vless"
+      headers:
+        Host: hangzzz.top
+
+  - name: "VM"
+    type: vmess
+    server: hangzzz.top
+    port: 9443
+    uuid: 1811b551-566e-4dc0-92d3-4c12aa7819f3
+    alterId: 0
+    cipher: auto
+    udp: true
+    tls: true
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: "/vmess"
+      headers:
+        Host: hangzzz.top
+
+  - name: "SS"
+    type: ss
+    server: hangzzz.top
+    port: 28443
+    cipher: chacha20-ietf-poly1305
+    password: "n0FpiK6Gp2c8U4qmt7Ws2U26DKg0eIGAavhRa8qrRzU="
+    udp: true
+
+proxy-groups:
+  - name: "ZMH"
+    type: select
+    proxies:
+      - "REALITY"
+      - "VL"
+      - "VM"
+      - "SS"
+
+rules:
+  - GEOIP,CN,DIRECT
+  - MATCH,ZMH
