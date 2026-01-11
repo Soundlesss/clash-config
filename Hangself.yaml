@@ -36,28 +36,11 @@ proxies:
       public-key: PGTrTptrJVQF1Z2k5M1PanhLbXJRpUcG78pG694Dmy8 # xray x25519 生成的公钥
     client-fingerprint: chrome
 
-  - name: "VL"
-    type: vless
-    server: sg.hangzzz.top
-    port: 8443
-    uuid: 8858a507-56a4-4cd5-ad60-9a389fad6b6e # 替换为你在服务器上生成的UUID
-    servername: sg.hangzzz.top # 与TLS证书的域名一致
-    flow: tls-rprx-vision
-    network: ws
-    tls: true
-    ws-opts:
-      path: "/vless" # 替换为你自己设置的伪装路径
-      headers:
-        Host: sg.hangzzz.top
-
-
 proxy-groups:
   - name: "Hangself"
     type: select
     proxies:
       - "REALITY"
-      - "VL"
-      - "VM"
       - "SS"
 
 rules:
